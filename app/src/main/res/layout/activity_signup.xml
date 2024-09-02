@@ -98,6 +98,7 @@
 
 
       <EditText
+          android:inputType="textPassword"
           android:id="@+id/password_input"
           android:layout_width="match_parent"
           android:layout_height="23dp"
@@ -149,6 +150,7 @@
 
 
       <EditText
+          android:inputType="textPassword"
           android:id="@+id/password_re_input"
           android:layout_width="match_parent"
           android:layout_height="23dp"
