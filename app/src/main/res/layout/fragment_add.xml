@@ -36,6 +36,7 @@
 
 
             <EditText
+                android:id="@+id/title_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
@@ -88,6 +89,7 @@
 
 
     <Button
+        android:id="@+id/add_button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"

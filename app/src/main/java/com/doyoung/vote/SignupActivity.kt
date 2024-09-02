@@ -1,6 +1,5 @@
 package com.doyoung.vote
 
-import Join
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log

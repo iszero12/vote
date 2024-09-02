@@ -1,5 +1,5 @@
-import com.doyoung.vote.JoinRequest
-import com.doyoung.vote.RetrofitClient
+package com.doyoung.vote
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
