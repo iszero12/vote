@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="203dp"
+        android:layout_height="144dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="81dp"
+        android:src="@drawable/logo_new"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/id_layout"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo_image"
+        android:layout_marginTop="7dp"
+        android:layout_marginHorizontal="40dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아이디"
+            android:textSize="24sp"
+            android:fontFamily="@font/pretendardbold"
+            android:textColor="#9B9B9B"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/login_background">
+
+
+            <EditText
+                android:id="@+id/id_input"
+                android:layout_width="match_parent"
+                android:layout_height="23dp"
+                android:layout_marginHorizontal="13dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@null"
+                android:hint="아이디를 입력하세요."
+                android:textSize="15sp"
+                android:textColorHint="#828282"
+                android:maxLines="1"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/psword_layout"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="40dp"
+        android:layout_height="86dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_layout"
+        android:layout_marginTop="43dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호"
+            android:textSize="24sp"
+            android:fontFamily="@font/pretendardbold"
+            android:textColor="#9B9B9B"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/login_background">
+
+
+            <EditText
+                android:id="@+id/password_input"
+                android:layout_width="match_parent"
+                android:layout_height="23dp"
+                android:layout_marginHorizontal="13dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@null"
+                android:hint="비밀번호를 입력하세요."
+                android:textSize="15sp"
+                android:textColorHint="#828282"
+                android:maxLines="1"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <Button
+        android:text="로그인"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:fontFamily="@font/pretendardbold"
+        android:id="@+id/enter_button"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="40dp"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="122dp"
+        android:background="@drawable/login_button"/>
+
+    <Button
+        android:id="@+id/go_signup"
+        android:layout_marginTop="23dp"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@null"
+        android:text="회원가입"
+        android:textSize="15sp"
+        android:textColor="#AFAFAF"
+        android:fontFamily="@font/pretendardbold"
+        app:layout_constraintTop_toBottomOf="@id/enter_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

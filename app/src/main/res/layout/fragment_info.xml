@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".InfoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal">
+
+
+        <TextView
+            android:id="@+id/test_edit"
+            android:text="Hello"
+            android:fontFamily="@font/pretendardbold"
+            android:textSize="40sp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/signout"
+            android:text="회원탈퇴"
+            android:textSize="20dp"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:fontFamily="@font/pretendardbold"
+            android:textColor="#000000"
+            android:background="@drawable/login_button" />
+
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/go_login"
+        android:text="로그인하기"
+        android:textSize="20dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:fontFamily="@font/pretendardbold"
+        android:textColor="#000000"
+        android:background="@drawable/login_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
