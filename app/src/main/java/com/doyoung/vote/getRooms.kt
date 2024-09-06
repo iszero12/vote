@@ -12,7 +12,7 @@ suspend fun getRooms(context: Context): List<Room>? {
             val authService = RetrofitClient.authService
             val authToken = getToken(context).toString()
             Log.d("token", authToken)
-            val response = authService.getRooms(authToken)  // RoomsResponse 반환
+            val response = authService.getRooms(authToken)
             response
         } catch (e: Exception) {
             e.printStackTrace()

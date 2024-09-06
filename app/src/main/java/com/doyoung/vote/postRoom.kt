@@ -11,7 +11,7 @@ suspend fun postRoom(context: Context, title: String, content: String): RoomsRes
             val authService = RetrofitClient.authService
             val roomsRequest = RoomsRequest(title, content)
             val authToken = getToken(context).toString()
-            val response = authService.postRooms(authToken, roomsRequest)  // RoomsResponse 반환
+            val response = authService.postRooms(authToken, roomsRequest)
             response
         } catch (e: Exception) {
             e.printStackTrace()

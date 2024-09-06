@@ -10,9 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class AddFragment : Fragment() {
@@ -31,6 +34,12 @@ class AddFragment : Fragment() {
                         val content = contentInput.text.toString()
                         val context: Context = this@AddFragment.requireContext()
                         val result = postRoom(context, title, content)
+                        if (result != null) {
+                            withContext(Dispatchers.Main){
+                                val addFinishText = findViewById<TextView>(R.id.add_finish_text)
+                                addFinishText.text = "생성이 완료되었습니다."
+                            }
+                        }
                     }
                 }
             }

@@ -84,10 +84,21 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TextView
+            android:id="@+id/add_finish_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginTop="40dp"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textAlignment="center"/>
+
 
 
 
     </LinearLayout>
+
 
 
     <Button

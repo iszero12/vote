@@ -18,10 +18,9 @@ import kotlinx.coroutines.launch
 
 class RoomAdapter(
     private val rooms: List<Room>,
-    private val fragmentManager: FragmentManager // FragmentManager 전달
+    private val fragmentManager: FragmentManager
 ) : RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
 
-    // ViewHolder 내부 클래스, Room 리스트를 받음
     class RoomViewHolder(itemView: View, private val rooms: List<Room>, private val fragmentManager: FragmentManager) : RecyclerView.ViewHolder(itemView) {
         val roomName: TextView = itemView.findViewById(R.id.room_name)
 
@@ -36,7 +35,6 @@ class RoomAdapter(
                             val response = getRoomsId(context, roomId)
                             Log.d("response", response.toString())
 
-                            // Fragment 생성 및 데이터 전달
                             val fragment = VoteFragment().apply {
                                 arguments = Bundle().apply {
                                     putInt("roomId", roomId)
@@ -45,7 +43,6 @@ class RoomAdapter(
                                 }
                             }
 
-                            // FragmentTransaction을 사용하여 Fragment 교체
                             (context as? FragmentActivity)?.supportFragmentManager?.beginTransaction()
                                 ?.replace(R.id.fragment_container, fragment)
                                 ?.addToBackStack(null)
@@ -59,12 +56,12 @@ class RoomAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.room_item, parent, false)
-        return RoomViewHolder(itemView, rooms, fragmentManager) // FragmentManager 전달
+        return RoomViewHolder(itemView, rooms, fragmentManager)
     }
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
         val room = rooms[position]
-        holder.roomName.text = room.title // Room의 title을 표시
+        holder.roomName.text = room.title
     }
 
     override fun getItemCount(): Int {

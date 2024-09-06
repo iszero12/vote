@@ -1,19 +1,17 @@
 package com.doyoung.vote
 
 import android.os.Bundle
-import android.provider.Settings.Global
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
 
 class VoteFragment : Fragment() {
     override fun onCreateView(
@@ -21,6 +19,9 @@ class VoteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_vote, container, false)
+        val activity = requireActivity() as MainActivity
+        activity.setBottomNavVisibility(false)
+
         rootView.apply {
             val title = arguments?.getString("title")
             val content = arguments?.getString("content")
@@ -29,9 +30,10 @@ class VoteFragment : Fragment() {
             val backButton = findViewById<Button>(R.id.back_button)
             titleView.text = title
             contentView.text = content
-            backButton.setOnClickListener{
+            backButton.setOnClickListener {
                 val fragmentManager = parentFragmentManager
                 fragmentManager.popBackStack()
+                activity.setBottomNavVisibility(true)
             }
             val yesButton = findViewById<ConstraintLayout>(R.id.yes_button)
             val noButton = findViewById<ConstraintLayout>(R.id.no_button)
@@ -41,24 +43,21 @@ class VoteFragment : Fragment() {
                     val context = requireContext()
                     if (id != null) {
                         val result = vote(context, true, id)
-                        val aResult = getResults(context,id)
-                        if (aResult != null){
+                        val aResult = getResults(context, id)
+                        if (aResult != null) {
                             withContext(Dispatchers.Main) {
                                 val yesBar = findViewById<ConstraintLayout>(R.id.yes_bar)
                                 val noBar = findViewById<ConstraintLayout>(R.id.no_bar)
                                 val yesPer = findViewById<TextView>(R.id.yes_per)
                                 val noPer = findViewById<TextView>(R.id.no_per)
                                 val yesLayoutParams = yesBar.layoutParams as ConstraintLayout.LayoutParams
-                                yesLayoutParams.matchConstraintPercentWidth = ((aResult.yes.toFloat() / (aResult.yes + aResult.no)))
-                                println(aResult.yes.toFloat() / (aResult.yes + aResult.no))
+                                yesLayoutParams.matchConstraintPercentWidth = (aResult.yes.toFloat() / (aResult.yes + aResult.no))
                                 yesBar.layoutParams = yesLayoutParams
                                 val noLayoutParams = noBar.layoutParams as ConstraintLayout.LayoutParams
-                                noLayoutParams.matchConstraintPercentWidth = ((aResult.no.toFloat() / (aResult.yes + aResult.no)))
+                                noLayoutParams.matchConstraintPercentWidth = (aResult.no.toFloat() / (aResult.yes + aResult.no))
                                 noBar.layoutParams = noLayoutParams
-                                println(aResult.yes)
-                                println(aResult.no)
-                                val yesPercent = ((aResult.yes.toFloat() / (aResult.yes + aResult.no)*100).toInt()).toString()
-                                val noPercent = ((aResult.no.toFloat() / (aResult.yes + aResult.no)*100).toInt()).toString()
+                                val yesPercent = ((aResult.yes.toFloat() / (aResult.yes + aResult.no) * 100).toInt()).toString()
+                                val noPercent = ((aResult.no.toFloat() / (aResult.yes + aResult.no) * 100).toInt()).toString()
                                 yesPer.text = yesPercent
                                 noPer.text = noPercent
                             }
@@ -66,32 +65,27 @@ class VoteFragment : Fragment() {
                     }
                 }
             }
-            noButton.setOnClickListener() {
-                println("click no button")
+            noButton.setOnClickListener {
                 GlobalScope.launch {
                     val id = arguments?.getInt("roomId")
-                    println(id)
                     val context = requireContext()
                     if (id != null) {
                         val result = vote(context, false, id)
-                        val aResult = getResults(context,id)
-                        if (aResult != null){
+                        val aResult = getResults(context, id)
+                        if (aResult != null) {
                             withContext(Dispatchers.Main) {
                                 val yesBar = findViewById<ConstraintLayout>(R.id.yes_bar)
                                 val noBar = findViewById<ConstraintLayout>(R.id.no_bar)
                                 val yesPer = findViewById<TextView>(R.id.yes_per)
                                 val noPer = findViewById<TextView>(R.id.no_per)
                                 val yesLayoutParams = yesBar.layoutParams as ConstraintLayout.LayoutParams
-                                yesLayoutParams.matchConstraintPercentWidth = ((aResult.yes.toFloat() / (aResult.yes + aResult.no)))
-                                println(aResult.yes.toFloat() / (aResult.yes + aResult.no))
+                                yesLayoutParams.matchConstraintPercentWidth = (aResult.yes.toFloat() / (aResult.yes + aResult.no))
                                 yesBar.layoutParams = yesLayoutParams
                                 val noLayoutParams = noBar.layoutParams as ConstraintLayout.LayoutParams
-                                noLayoutParams.matchConstraintPercentWidth = ((aResult.no.toFloat() / (aResult.yes + aResult.no)))
+                                noLayoutParams.matchConstraintPercentWidth = (aResult.no.toFloat() / (aResult.yes + aResult.no))
                                 noBar.layoutParams = noLayoutParams
-                                println(aResult.yes)
-                                println(aResult.no)
-                                val yesPercent = ((aResult.yes.toFloat() / (aResult.yes + aResult.no)*100).toInt()).toString()
-                                val noPercent = ((aResult.no.toFloat() / (aResult.yes + aResult.no)*100).toInt()).toString()
+                                val yesPercent = ((aResult.yes.toFloat() / (aResult.yes + aResult.no) * 100).toInt()).toString()
+                                val noPercent = ((aResult.no.toFloat() / (aResult.yes + aResult.no) * 100).toInt()).toString()
                                 yesPer.text = yesPercent
                                 noPer.text = noPercent
                             }
@@ -101,5 +95,11 @@ class VoteFragment : Fragment() {
             }
         }
         return rootView
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val activity = requireActivity() as MainActivity
+        activity.setBottomNavVisibility(true)
     }
 }
