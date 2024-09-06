@@ -1,15 +1,18 @@
 package com.doyoung.vote
 
+import android.content.Context
+import android.util.Log
+import getToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-suspend fun RoomsPost(title: String, content: String): RoomsResponse? {
+suspend fun getResults(context: Context,roomId: Int): VoteResponse? {
     return withContext(Dispatchers.IO) {
         try {
             val authService = RetrofitClient.authService
-            val roomsRequest = RoomsRequest(title, content)
-            val authToken = "dummy"
-            val response = authService.rooms(authToken, roomsRequest)  // RoomsResponse 반환
+            val authToken = getToken(context).toString()
+            Log.d("token", authToken)
+            val response = authService.getResults(authToken,roomId)  // RoomsResponse 반환
             response
         } catch (e: Exception) {
             e.printStackTrace()

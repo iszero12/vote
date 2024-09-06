@@ -1,16 +1,20 @@
 package com.doyoung.vote
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import saveToken
+
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +37,14 @@ class LoginActivity : AppCompatActivity() {
                 val result = login(username, password)
                 Log.d("result", result.toString())
                 if (result != null){
+                    val context: Context = this@LoginActivity
+                    saveToken(context,result)
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
+                }
+                else{
+                    val errorView : TextView = findViewById(R.id.error_view)
+                    errorView.text = "로그인 실패"
                 }
             }
         }

@@ -69,4 +69,5 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.converter.scalars)
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.preferences.v100)
 }

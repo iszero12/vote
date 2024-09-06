@@ -189,10 +189,10 @@
 
   <Button
       android:id="@+id/go_login"
+      android:background="@null"
       android:layout_marginTop="23dp"
       android:layout_width="56dp"
       android:layout_height="23dp"
-      android:background="@null"
       android:text="로그인"
       android:textSize="15sp"
       android:textColor="#AFAFAF"

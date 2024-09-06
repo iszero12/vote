@@ -27,22 +27,23 @@ class SignupActivity : AppCompatActivity() {
         val passwordReInput : EditText = findViewById(R.id.password_re_input)
         val SignupButton : Button = findViewById(R.id.signup_button)
         val goLoginButton : Button = findViewById(R.id.go_login)
-        SignupButton.setOnClickListener(){
+
             val username = usernameInput.text.toString()
             val password = passwordInput.text.toString()
             val passwordRe = passwordReInput.text.toString()
-            GlobalScope.launch {
-                val result = Join(username, password, passwordRe)
-                Log.d("result", result.toString())
-                if (result == "ok"){
-                    val intent = Intent(this@SignupActivity, LoginActivity::class.java)
-                    startActivity(intent)
+            SignupButton.setOnClickListener {
+                GlobalScope.launch {
+                    val result = Join(username, password, passwordRe)
+                    Log.d("result", result.toString())
+                    if (result == "ok") {
+                        val intent = Intent(this@SignupActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
             }
-            goLoginButton.setOnClickListener(){
-                val intent = Intent(this, LoginActivity::class.java)
+            goLoginButton.setOnClickListener{
+                val intent = Intent(this@SignupActivity, LoginActivity::class.java)
                 startActivity(intent)
             }
         }
     }
-}

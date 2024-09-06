@@ -1,59 +1,105 @@
 package com.doyoung.vote
 
 import android.os.Bundle
+import android.provider.Settings.Global
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [VoteFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class VoteFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vote, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment VoteFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            VoteFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        val rootView = inflater.inflate(R.layout.fragment_vote, container, false)
+        rootView.apply {
+            val title = arguments?.getString("title")
+            val content = arguments?.getString("content")
+            val contentView = findViewById<TextView>(R.id.content_view)
+            val titleView = findViewById<TextView>(R.id.title_view)
+            val backButton = findViewById<Button>(R.id.back_button)
+            titleView.text = title
+            contentView.text = content
+            backButton.setOnClickListener{
+                val fragmentManager = parentFragmentManager
+                fragmentManager.popBackStack()
+            }
+            val yesButton = findViewById<ConstraintLayout>(R.id.yes_button)
+            val noButton = findViewById<ConstraintLayout>(R.id.no_button)
+            yesButton.setOnClickListener {
+                GlobalScope.launch {
+                    val id = arguments?.getInt("roomId")
+                    val context = requireContext()
+                    if (id != null) {
+                        val result = vote(context, true, id)
+                        val aResult = getResults(context,id)
+                        if (aResult != null){
+                            withContext(Dispatchers.Main) {
+                                val yesBar = findViewById<ConstraintLayout>(R.id.yes_bar)
+                                val noBar = findViewById<ConstraintLayout>(R.id.no_bar)
+                                val yesPer = findViewById<TextView>(R.id.yes_per)
+                                val noPer = findViewById<TextView>(R.id.no_per)
+                                val yesLayoutParams = yesBar.layoutParams as ConstraintLayout.LayoutParams
+                                yesLayoutParams.matchConstraintPercentWidth = ((aResult.yes.toFloat() / (aResult.yes + aResult.no)))
+                                println(aResult.yes.toFloat() / (aResult.yes + aResult.no))
+                                yesBar.layoutParams = yesLayoutParams
+                                val noLayoutParams = noBar.layoutParams as ConstraintLayout.LayoutParams
+                                noLayoutParams.matchConstraintPercentWidth = ((aResult.no.toFloat() / (aResult.yes + aResult.no)))
+                                noBar.layoutParams = noLayoutParams
+                                println(aResult.yes)
+                                println(aResult.no)
+                                val yesPercent = ((aResult.yes.toFloat() / (aResult.yes + aResult.no)*100).toInt()).toString()
+                                val noPercent = ((aResult.no.toFloat() / (aResult.yes + aResult.no)*100).toInt()).toString()
+                                yesPer.text = yesPercent
+                                noPer.text = noPercent
+                            }
+                        }
+                    }
                 }
             }
+            noButton.setOnClickListener() {
+                println("click no button")
+                GlobalScope.launch {
+                    val id = arguments?.getInt("roomId")
+                    println(id)
+                    val context = requireContext()
+                    if (id != null) {
+                        val result = vote(context, false, id)
+                        val aResult = getResults(context,id)
+                        if (aResult != null){
+                            withContext(Dispatchers.Main) {
+                                val yesBar = findViewById<ConstraintLayout>(R.id.yes_bar)
+                                val noBar = findViewById<ConstraintLayout>(R.id.no_bar)
+                                val yesPer = findViewById<TextView>(R.id.yes_per)
+                                val noPer = findViewById<TextView>(R.id.no_per)
+                                val yesLayoutParams = yesBar.layoutParams as ConstraintLayout.LayoutParams
+                                yesLayoutParams.matchConstraintPercentWidth = ((aResult.yes.toFloat() / (aResult.yes + aResult.no)))
+                                println(aResult.yes.toFloat() / (aResult.yes + aResult.no))
+                                yesBar.layoutParams = yesLayoutParams
+                                val noLayoutParams = noBar.layoutParams as ConstraintLayout.LayoutParams
+                                noLayoutParams.matchConstraintPercentWidth = ((aResult.no.toFloat() / (aResult.yes + aResult.no)))
+                                noBar.layoutParams = noLayoutParams
+                                println(aResult.yes)
+                                println(aResult.no)
+                                val yesPercent = ((aResult.yes.toFloat() / (aResult.yes + aResult.no)*100).toInt()).toString()
+                                val noPercent = ((aResult.no.toFloat() / (aResult.yes + aResult.no)*100).toInt()).toString()
+                                yesPer.text = yesPercent
+                                noPer.text = noPercent
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return rootView
     }
 }

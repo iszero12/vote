@@ -1,14 +1,17 @@
 package com.doyoung.vote
 
+import android.content.Context
+import getToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-suspend fun Join(username: String, password: String, confirmPassword: String): String? {
+suspend fun vote(context: Context, choice: Boolean, roomId: Int): String? {
     return withContext(Dispatchers.IO) {
         try {
             val authService = RetrofitClient.authService
-            val joinRequest = JoinRequest(username, password, confirmPassword)
-            val response = authService.join(joinRequest)
+            val voteRequest = VoteRequest(choice)
+            val authToken = getToken(context).toString()
+            val response = authService.vote(authToken, roomId, voteRequest)
             response
         } catch (e: Exception) {
             e.printStackTrace()
