@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import saveToken
 
 
 class InfoFragment : Fragment() {
@@ -16,14 +20,23 @@ class InfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val rootView =  inflater.inflate(R.layout.fragment_info, container, false)
-        rootView.apply{
-            val goLoginButton : Button = findViewById(R.id.go_login)
-            goLoginButton.setOnClickListener{
+        val rootView = inflater.inflate(R.layout.fragment_info, container, false)
+        rootView.apply {
+            val goLoginButton: Button = findViewById(R.id.go_login)
+            goLoginButton.setOnClickListener {
                 val intent = Intent(activity, LoginActivity::class.java)
                 startActivity(intent)
             }
+            val rogOutButton: Button = findViewById(R.id.rog_out)
+            rogOutButton.setOnClickListener {
+                val context = requireContext()
+                saveToken(context,"")
+                val rogOutText: TextView = findViewById(R.id.rog_out_text)
+                rogOutText.text = "로그아웃 되었습니다."
+
+            }
+
+            return rootView
         }
-        return rootView
     }
 }

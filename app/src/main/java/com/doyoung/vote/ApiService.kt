@@ -1,6 +1,7 @@
 package com.doyoung.vote
 
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -35,5 +36,9 @@ interface AuthService {
         @Header("Authorization") token: String,
         @Path("roomId") roomId: Int
     ): VoteResponse
+    @DELETE("users/delete")
+    suspend fun deleteUser(
+        @Header("Authorization") token: String
+    ): String
 
 }

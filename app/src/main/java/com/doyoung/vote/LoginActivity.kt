@@ -11,8 +11,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import saveToken
 
 
@@ -35,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
             val password = passwordInput.text.toString()
             GlobalScope.launch {
                 val result = login(username, password)
-                Log.d("result", result.toString())
+                Log.d("resultdddd", result.toString())
                 if (result != null){
                     val context: Context = this@LoginActivity
                     saveToken(context,result)
@@ -43,13 +45,15 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 else{
-                    val errorView : TextView = findViewById(R.id.error_view)
-                    errorView.text = "로그인 실패"
+                    withContext(Dispatchers.Main) {
+                        val errorView: TextView = findViewById(R.id.error_view)
+                        errorView.text = "로그인 실패"
+                    }
                 }
             }
         }
 
-        goSignupButton.setOnClickListener(){
+        goSignupButton.setOnClickListener{
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
