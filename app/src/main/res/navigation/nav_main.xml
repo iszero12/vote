@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.doyoung.vote.MainFragment"
+        android:name="com.doyoung.vote.view.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.doyoung.vote.AddFragment"
+        android:name="com.doyoung.vote.view.fragment.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" />
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.doyoung.vote.InfoFragment"
+        android:name="com.doyoung.vote.view.fragment.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
     <fragment
         android:id="@+id/voteFragment"
-        android:name="com.doyoung.vote.VoteFragment"
+        android:name="com.doyoung.vote.view.fragment.VoteFragment"
         android:label="fragment_vote"
         tools:layout="@layout/fragment_vote" />
 </navigation>
