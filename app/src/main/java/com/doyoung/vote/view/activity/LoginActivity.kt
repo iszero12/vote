@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.doyoung.vote.R
+import com.doyoung.vote.server.post.postLogin
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -37,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
             val username = usernameInput.text.toString()
             val password = passwordInput.text.toString()
             GlobalScope.launch {
-                val result = login(username, password)
+                val result = postLogin(username, password)
                 Log.d("resultdddd", result.toString())
                 if (result != null){
                     val context: Context = this@LoginActivity

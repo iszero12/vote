@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.doyoung.vote.R
+import com.doyoung.vote.server.post.postJoin
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -34,7 +35,7 @@ class SignupActivity : AppCompatActivity() {
             val passwordRe = passwordReInput.text.toString()
             SignupButton.setOnClickListener {
                 GlobalScope.launch {
-                    val result = Join(username, password, passwordRe)
+                    val result = postJoin(username, password, passwordRe)
                     Log.d("result", result.toString())
                     if (result == "ok") {
                         val intent = Intent(this@SignupActivity, LoginActivity::class.java)
